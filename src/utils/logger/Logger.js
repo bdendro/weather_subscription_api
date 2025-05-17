@@ -1,10 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import ENV from '../../config/env.js';
 import levels from './levels.js';
 import formatMessage from './formatter.js';
 import getErrorInfo from './getErrorInfo.js';
-import { ENV_LOCAL } from '../../constants/env.js';
+import { ENV_DEV } from '../../constants/env.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,7 +22,7 @@ class Logger {
   }
 
   __writeMsg(msg) {
-    if (process.env.APP_ENV === ENV_LOCAL) {
+    if (ENV.NODE_ENV === ENV_DEV) {
       console.log(msg);
     } else {
       fs.appendFile(this.logPath, `${msg}\n`, (err) => {
@@ -42,7 +43,7 @@ class Logger {
     this.__log(levels.INFO, msg);
   }
 
-  warning(msg) {
+  warn(msg) {
     this.__log(levels.WARNING, msg);
   }
 

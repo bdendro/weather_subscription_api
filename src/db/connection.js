@@ -1,15 +1,16 @@
 import { Sequelize } from 'sequelize';
 import Logger from '../utils/logger/Logger.js';
+import ENV from '../config/env.js';
 
 const logger = new Logger();
 
 const sequelize = new Sequelize({
   dialect: 'postgres',
-  host: process.env.DB_HOSTNAME,
-  port: process.env.DB_PORT,
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: ENV.DB_HOSTNAME,
+  port: ENV.DB_PORT,
+  username: ENV.DB_USERNAME,
+  password: ENV.DB_PASSWORD,
+  database: ENV.DB_NAME,
   logging: false,
 });
 
