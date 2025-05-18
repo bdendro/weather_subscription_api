@@ -3,10 +3,11 @@ import { fileURLToPath } from 'node:url';
 import express from 'express';
 import cors from 'cors';
 import ENV from './config/env.js';
-import router from './routes/router.js';
-import Logger from './utils/logger/Logger.js';
 import sequelize from './db/connection.js';
 import './models/index.js';
+import './jobs/manager.js';
+import router from './routes/router.js';
+import Logger from './utils/logger/Logger.js';
 import errorHandler from './middlewares/errorHandler.js';
 
 const __filename = fileURLToPath(import.meta.url);

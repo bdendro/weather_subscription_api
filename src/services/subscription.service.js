@@ -1,10 +1,19 @@
+import ms from 'ms';
+import { Op } from 'sequelize';
 import { DB_ERRORS } from '../constants/dbErrors.js';
 import sequelize from '../db/connection.js';
 import { ConflictError, NotFoundError } from '../utils/customErrors.js';
-import Subscription from '../models/Subscription.model.js';
+
 export default class SubscriptionService {
-  constructor(subscription) {
+  constructor(Subscription) {
     this.Subscription = Subscription;
+  }
+
+  async getByFrequency(freq) {
+    const subscriptions = await this.Subscription.findAll({
+      where: { frequency: freq, confirmed: true },
+    });
+    return subscriptions;
   }
 
   async postSubscription(subscription) {
@@ -40,12 +49,12 @@ export default class SubscriptionService {
       return record;
     });
     return deleted;
-    // const a = await this.Subscription.destroy({
-    //   where: { token, confirmed: true },
-    //   returning: true,
-    // });
-    // console.log(a);
-    // if (!a) throw new NotFoundError('Token not found');
-    // return a;
+  }
+
+  async deleteUnconfirmed(expirationTime) {
+    const expirationDate = new Date(Date.now() - ms(expirationTime));
+    return await this.Subscription.destroy({
+      where: { confirmed: false, createdAt: { [Op.lte]: expirationDate } },
+    });
   }
 }

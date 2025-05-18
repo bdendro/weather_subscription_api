@@ -24,10 +24,7 @@ export const subscribe = async (req, res, next) => {
 export const confirmSubscription = async (req, res, next) => {
   const token = normalizeSubscriptionToken(req.params.token);
   try {
-    const subscription = await subscriptionService.updateConfirmation(
-      token,
-      true
-    );
+    const subscription = await subscriptionService.updateConfirmation(token, true);
     await emailProvider.sendConfirmedMail(subscription.email, token);
     return res.json({ message: 'Subscription confirmed successfully' });
   } catch (err) {

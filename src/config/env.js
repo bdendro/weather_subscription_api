@@ -7,6 +7,7 @@ const ENV = Object.freeze({
 
   APP_PORT: Number(process.env.APP_PORT) || 3000,
   APP_BASE_URL: process.env.APP_BASE_URL,
+  APP_TIMEZONE: process.env.APP_TIMEZONE,
 
   DB_HOSTNAME: process.env.DB_HOSTNAME,
   DB_PORT: Number(process.env.DB_PORT) || null,
@@ -22,6 +23,9 @@ const ENV = Object.freeze({
 
   WEATHER_BASE_URL: process.env.WEATHER_BASE_URL,
   WEATER_API_KEY: process.env.WEATER_API_KEY,
+
+  UNCONFIRMED_EXPIRATION_TIME: process.env.UNCONFIRMED_EXPIRATION_TIME,
+  UNCONFIRMED_SCHEDULE: process.env.UNCONFIRMED_SCHEDULE,
 });
 
 validateEnv(ENV);
