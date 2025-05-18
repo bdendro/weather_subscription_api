@@ -33,6 +33,7 @@ Subscription.init(
     token: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
+      unique: true,
     },
   },
   {

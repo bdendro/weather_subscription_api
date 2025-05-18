@@ -3,9 +3,10 @@ import { BadRequestError } from '../utils/customErrors.js';
 const validateSchema =
   (schema, prop = 'body') =>
   async (req, res, next) => {
-    const { error } = schema.validate(req[prop], {
+    const { error } = schema.validate(req[prop] || {}, {
       allowUnknown: false,
       abortEarly: false,
+      presence: 'required',
     });
     if (error) return next(new BadRequestError(error.message));
 

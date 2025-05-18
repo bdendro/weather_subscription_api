@@ -1,16 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import ENV from '../../config/env.js';
 import levels from './levels.js';
 import formatMessage from './formatter.js';
 import getErrorInfo from './getErrorInfo.js';
 import { ENV_DEV } from '../../constants/env.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const rootDir = path.resolve(__dirname, '..', '..', '..');
+const rootDir = process.cwd();
 
 class Logger {
   constructor(logPath = path.join(rootDir, 'logs', 'app.log')) {

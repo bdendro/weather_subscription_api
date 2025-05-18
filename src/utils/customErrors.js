@@ -18,6 +18,12 @@ export class BadRequestError extends AppError {
   }
 }
 
+export class ConflictError extends AppError {
+  constructor(message = 'Conflict') {
+    super(message, 409);
+  }
+}
+
 export class InternalServerError extends AppError {
   constructor(
     message = 'Internal server error',
