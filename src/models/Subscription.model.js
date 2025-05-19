@@ -38,6 +38,7 @@ Subscription.init(
   },
   {
     sequelize,
+    tableName: 'subscriptions',
     timestamps: true,
   }
 );
